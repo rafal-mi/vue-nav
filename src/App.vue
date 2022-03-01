@@ -8,13 +8,15 @@ function sidebar(visible) {
 }
 
 const state = reactive({
-  sidebar: true,
+  sidebar: false,
 });
 </script>
 
 <template>
   <top-nav @visible="sidebar" />
-  <side-nav v-if="state.sidebar" @visible="sidebar" />
+  <Transition name="slide-fade">
+    <side-nav class="sidenav" v-if="state.sidebar" @visible="sidebar" />
+  </Transition>
   <header>
     <img
       alt="Vue logo"
@@ -31,5 +33,30 @@ const state = reactive({
 <style>
 @import "@/assets/base.css";
 /* @import "@/assets/app.css"; */
+
+.sidenav {
+  width: 500px;
+  transform: translateX(0px);
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-to,
+.slide-fade-leave-from {
+  transform: translateX(0px);
+  opacity: 1.0;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(-500px);
+  opacity: 0;
+}
 
 </style>
