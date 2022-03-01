@@ -1,7 +1,9 @@
 <script setup>
 import { reactive, computed } from 'vue'
 import TopNav from "@/components/TopNav.vue";
+import TopBar from "@/components/TopBar.vue";
 import SideNav from "@/components/SideNav.vue";
+import SideBar from "@/components/SideBar.vue";
 
 function sidebar(visible) {
   state.sidebar = visible;
@@ -13,10 +15,14 @@ const state = reactive({
 </script>
 
 <template>
-  <top-nav @visible="sidebar" />
-  <Transition name="slide-fade">
+  <!-- <top-nav @visible="sidebar" /> -->
+  <top-bar @visible="sidebar" />
+
+  <!-- <Transition name="slide-fade">
     <side-nav class="sidenav" v-if="state.sidebar" @visible="sidebar" />
-  </Transition>
+  </Transition> -->
+  <side-bar class="sidebar" v-if="state.sidebar" @visible="sidebar" />
+
   <header>
     <img
       alt="Vue logo"
@@ -31,6 +37,7 @@ const state = reactive({
 </template>
 
 <style>
+@import "@/assets/w3.css";
 @import "@/assets/base.css";
 /* @import "@/assets/app.css"; */
 
@@ -57,6 +64,14 @@ const state = reactive({
 .slide-fade-leave-to {
   transform: translateX(-500px);
   opacity: 0;
+}
+
+/* Side Bar */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 </style>
