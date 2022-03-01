@@ -1,11 +1,20 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { reactive, computed } from 'vue'
 import TopNav from "@/components/TopNav.vue";
+import SideNav from "@/components/SideNav.vue";
 
+function sidebar(visible) {
+  state.sidebar = visible;
+}
+
+const state = reactive({
+  sidebar: true,
+});
 </script>
 
 <template>
-  <TopNav />
+  <top-nav @visible="sidebar" />
+  <side-nav v-if="state.sidebar" @visible="sidebar" />
   <header>
     <img
       alt="Vue logo"
@@ -14,15 +23,6 @@ import TopNav from "@/components/TopNav.vue";
       width="125"
       height="125"
     />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
   </header>
 
   <RouterView />
