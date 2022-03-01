@@ -5,23 +5,23 @@ import TopBar from "@/components/TopBar.vue";
 import SideNav from "@/components/SideNav.vue";
 import SideBar from "@/components/SideBar.vue";
 
-function sidebar(visible) {
-  state.sidebar = visible;
+function visibility(visible) {
+  state.visible = visible;
 }
 
 const state = reactive({
-  sidebar: false,
+  visible: false,
 });
 </script>
 
 <template>
   <!-- <top-nav @visible="sidebar" /> -->
-  <top-bar @visible="sidebar" />
+  <top-bar @visible="visibility" />
 
   <!-- <Transition name="slide-fade">
     <side-nav class="sidenav" v-if="state.sidebar" @visible="sidebar" />
   </Transition> -->
-  <side-bar class="sidebar" v-if="state.sidebar" @visible="sidebar" />
+  <side-bar class="sidebar" v-if="state.visible" @visible="visibility" />
 
   <header>
     <img
